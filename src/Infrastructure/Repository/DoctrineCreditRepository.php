@@ -10,7 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class DoctrineCreditRepository implements CreditRepositoryInterface
 {
-    public function __construct(private EntityManagerInterface $entityManager) {}
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
+    }
 
     public function save(Credit $credit): void
     {

@@ -10,7 +10,9 @@ use Doctrine\ORM\EntityManagerInterface;
 
 class DoctrineClientRepository implements ClientRepositoryInterface
 {
-    public function __construct(private EntityManagerInterface $entityManager) {}
+    public function __construct(private EntityManagerInterface $entityManager)
+    {
+    }
 
     public function find(int $id): ?Client
     {

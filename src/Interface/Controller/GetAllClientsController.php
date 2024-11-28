@@ -5,6 +5,8 @@ declare(strict_types=1);
 namespace App\Interface\Controller;
 
 use App\Application\UseCase\GetAllClients\GetAllClientsQuery;
+use App\Interface\OpenApi\Schemas\ClientSchema;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Response;
@@ -18,7 +20,6 @@ class GetAllClientsController
 
     public function __construct(private MessageBusInterface $messageBus)
     {
-        $this->messageBus = $messageBus;
     }
 
     #[Route('/api/clients', name: 'get_all_clients', methods: ['GET'])]
@@ -34,20 +35,8 @@ class GetAllClientsController
                     type: 'array',
                     items: new OA\Items(
                         properties: [
-                            new OA\Property(property: 'id', type: 'integer', example: 1),
-                            new OA\Property(property: 'firstName', type: 'string', example: 'John'),
-                            new OA\Property(property: 'lastName', type: 'string', example: 'Doe'),
-                            new OA\Property(property: 'age', type: 'integer', example: 30),
-                            new OA\Property(property: 'creditScore', type: 'integer', example: 700),
                             new OA\Property(
-                                property: 'address',
-                                properties: [
-                                    new OA\Property(property: 'street', type: 'string', example: '123 Main St'),
-                                    new OA\Property(property: 'city', type: 'string', example: 'Los Angeles'),
-                                    new OA\Property(property: 'state', type: 'string', example: 'CA'),
-                                    new OA\Property(property: 'zip', type: 'string', example: '90001'),
-                                ],
-                                type: 'object'
+                                ref: new Model(type: ClientSchema::class)
                             ),
                         ],
                         type: 'object'

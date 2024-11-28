@@ -6,5 +6,7 @@ namespace App\Application\UseCase\GetClient;
 
 class GetClientQuery
 {
-    public function __construct(public int $clientId) {}
+    public function __construct(public int $clientId)
+    {
+    }
 }

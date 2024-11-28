@@ -9,6 +9,7 @@ class NotifyClientCommand
     public function __construct(
         public int $clientId,
         public string $message,
-        public string $channel // 'email' или 'sms'
-    ) {}
+        public string $channel, // 'email' или 'sms'
+    ) {
+    }
 }

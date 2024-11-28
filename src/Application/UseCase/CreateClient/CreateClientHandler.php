@@ -9,7 +9,9 @@ use App\Domain\Repository\ClientRepositoryInterface;
 
 class CreateClientHandler
 {
-    public function __construct(private ClientRepositoryInterface $repository) {}
+    public function __construct(private ClientRepositoryInterface $repository)
+    {
+    }
 
     public function __invoke(CreateClientCommand $command): Client
     {

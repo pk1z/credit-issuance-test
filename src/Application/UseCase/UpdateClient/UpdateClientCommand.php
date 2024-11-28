@@ -14,6 +14,7 @@ class UpdateClientCommand
         public ?string $lastName = null,
         public ?int $age = null,
         public ?int $creditScore = null,
-        public ?Address $address = null
-    ) {}
+        public ?Address $address = null,
+    ) {
+    }
 }

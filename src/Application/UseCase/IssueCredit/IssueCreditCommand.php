@@ -9,6 +9,7 @@ class IssueCreditCommand
     public function __construct(
         public int $clientId,
         public int $amount,
-        public int $term
-    ) {}
+        public int $loanTerm,
+    ) {
+    }
 }

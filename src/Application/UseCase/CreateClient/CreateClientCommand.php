@@ -15,6 +15,7 @@ class CreateClientCommand
         public int $creditScore,
         public string $email,
         public string $phone,
-        public Address $address
-    ) {}
+        public Address $address,
+    ) {
+    }
 }

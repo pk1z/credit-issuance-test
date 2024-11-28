@@ -6,6 +6,7 @@ namespace App\Domain\Entity;
 
 use App\Domain\ValueObject\Address;
 use Doctrine\ORM\Mapping as ORM;
+use DomainException;
 
 #[ORM\Entity]
 class Client
@@ -42,14 +43,14 @@ class Client
         int $creditScore,
         string $email,
         string $phone,
-        Address $address
+        Address $address,
     ) {
         if ($age < 18 || $age > 60) {
-            throw new \DomainException('Client age must be between 18 and 60.');
+            throw new DomainException('Client age must be between 18 and 60.');
         }
 
         if ($creditScore < 300 || $creditScore > 850) {
-            throw new \DomainException('Credit score must be between 300 and 850.');
+            throw new DomainException('Credit score must be between 300 and 850.');
         }
 
         $this->firstName = $firstName;
@@ -121,7 +122,7 @@ class Client
         $this->lastName = $lastName;
     }
 
-    public function getEmail():string
+    public function getEmail(): string
     {
         return $this->email;
     }

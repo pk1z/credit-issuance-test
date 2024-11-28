@@ -5,16 +5,22 @@ declare(strict_types=1);
 namespace App\Interface\Controller;
 
 use App\Application\UseCase\UpdateClient\UpdateClientCommand;
-use Symfony\Component\Messenger\MessageBusInterface;
+use App\Domain\ValueObject\Address;
+use App\Interface\OpenApi\Schemas\ClientSchema;
+use Nelmio\ApiDocBundle\Attribute\Model;
+use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
-use OpenApi\Attributes as OA;
-use App\Domain\ValueObject\Address;
+
+use function json_decode;
 
 class UpdateClientController
 {
-    public function __construct(private MessageBusInterface $messageBus) {}
+    public function __construct(private MessageBusInterface $messageBus)
+    {
+    }
 
     #[Route('/api/clients/{id}', name: 'update_client', methods: ['PUT'])]
     #[OA\Put(
@@ -25,20 +31,9 @@ class UpdateClientController
             required: true,
             content: new OA\JsonContent(
                 properties: [
-                    new OA\Property(property: 'firstName', type: 'string', example: 'John'),
-                    new OA\Property(property: 'lastName', type: 'string', example: 'Doe'),
-                    new OA\Property(property: 'age', type: 'integer', example: 30),
-                    new OA\Property(property: 'creditScore', type: 'integer', example: 700),
                     new OA\Property(
-                        property: 'address',
-                        properties: [
-                            new OA\Property(property: 'street', type: 'string', example: '123 Main St'),
-                            new OA\Property(property: 'city', type: 'string', example: 'Los Angeles'),
-                            new OA\Property(property: 'state', type: 'string', example: 'CA'),
-                            new OA\Property(property: 'zip', type: 'string', example: '90001')
-                        ],
-                        type: 'object'
-                    )
+                        ref: new Model(type: ClientSchema::class)
+                    ),
                 ],
                 type: 'object'
             )
@@ -51,7 +46,7 @@ class UpdateClientController
                 in: 'path',
                 required: true,
                 schema: new OA\Schema(type: 'integer')
-            )
+            ),
         ],
         responses: [
             new OA\Response(
@@ -59,7 +54,7 @@ class UpdateClientController
                 description: 'Client updated successfully',
                 content: new OA\JsonContent(
                     properties: [
-                        new OA\Property(property: 'status', type: 'string', example: 'Client updated successfully.')
+                        new OA\Property(property: 'status', type: 'string', example: 'Client updated successfully.'),
                     ],
                     type: 'object'
                 )
@@ -70,7 +65,7 @@ class UpdateClientController
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: 'status', type: 'string', example: 'error'),
-                        new OA\Property(property: 'message', type: 'string', example: 'Validation failed.')
+                        new OA\Property(property: 'message', type: 'string', example: 'Validation failed.'),
                     ],
                     type: 'object'
                 )
@@ -81,11 +76,11 @@ class UpdateClientController
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: 'status', type: 'string', example: 'error'),
-                        new OA\Property(property: 'message', type: 'string', example: 'Client not found.')
+                        new OA\Property(property: 'message', type: 'string', example: 'Client not found.'),
                     ],
                     type: 'object'
                 )
-            )
+            ),
         ]
     )]
     public function __invoke(int $id, Request $request): JsonResponse
@@ -111,4 +106,3 @@ class UpdateClientController
         return new JsonResponse(['status' => 'Client updated successfully.'], JsonResponse::HTTP_OK);
     }
 }
-

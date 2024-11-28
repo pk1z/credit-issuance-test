@@ -8,7 +8,6 @@ class SmsSender
 {
     public function send(string $phoneNumber, string $message): void
     {
-        // Реализация отправки SMS, например, через сторонний сервис (Twilio, Nexmo и т.д.).
         echo "SMS sent to $phoneNumber with message: $message\n";
     }
 }

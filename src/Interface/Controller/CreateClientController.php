@@ -2,11 +2,12 @@
 
 declare(strict_types=1);
 
-
 namespace App\Interface\Controller;
 
 use App\Application\UseCase\CreateClient\CreateClientCommand;
 use App\Domain\ValueObject\Address;
+use App\Interface\OpenApi\Schemas\ClientSchema;
+use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
@@ -14,9 +15,16 @@ use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
+use function is_array;
+use function is_int;
+use function is_string;
+use function json_decode;
+
 class CreateClientController
 {
-    public function __construct(private MessageBusInterface $messageBus) {}
+    public function __construct(private MessageBusInterface $messageBus)
+    {
+    }
 
     #[Route('/api/clients', name: 'create_client', methods: ['POST'])]
     #[OA\Post(
@@ -26,22 +34,9 @@ class CreateClientController
             required: true,
             content: new OA\JsonContent(
                 properties: [
-                    new OA\Property(property: 'firstName', type: 'string', example: 'John'),
-                    new OA\Property(property: 'lastName', type: 'string', example: 'Doe'),
-                    new OA\Property(property: 'age', type: 'integer', example: 30),
-                    new OA\Property(property: 'creditScore', type: 'integer', example: 700),
-                    new OA\Property(property: 'email', type: 'string', example: 'john@email.com'),
-                    new OA\Property(property: 'phone', type: 'string', example: '1-800-555-5555'),
                     new OA\Property(
-                        property: 'address',
-                        properties: [
-                            new OA\Property(property: 'street', type: 'string', example: '123 Main St'),
-                            new OA\Property(property: 'city', type: 'string', example: 'Los Angeles'),
-                            new OA\Property(property: 'state', type: 'string', example: 'CA'),
-                            new OA\Property(property: 'zip', type: 'string', example: '90001')
-                        ],
-                        type: 'object'
-                    )
+                        ref: new Model(type: ClientSchema::class)
+                    ),
                 ],
                 type: 'object'
             )
@@ -53,7 +48,7 @@ class CreateClientController
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: 'status', type: 'string', example: 'success'),
-                        new OA\Property(property: 'message', type: 'string', example: 'Client created successfully.')
+                        new OA\Property(property: 'message', type: 'string', example: 'Client created successfully.'),
                     ],
                     type: 'object'
                 )
@@ -64,18 +59,17 @@ class CreateClientController
                 content: new OA\JsonContent(
                     properties: [
                         new OA\Property(property: 'status', type: 'string', example: 'error'),
-                        new OA\Property(property: 'errors', type: 'array', items: new OA\Items(type: 'string'))
+                        new OA\Property(property: 'errors', type: 'array', items: new OA\Items(type: 'string')),
                     ],
                     type: 'object'
                 )
-            )
+            ),
         ]
     )]
     public function __invoke(Request $request): JsonResponse
     {
         $data = json_decode($request->getContent(), true);
 
-        // Валидация входных данных
         $errors = $this->validateClientData($data);
 
         if (!empty($errors)) {
@@ -97,7 +91,6 @@ class CreateClientController
             )
         );
 
-        // Отправка команды через Messenger
         $this->messageBus->dispatch($command);
 
         return new JsonResponse(['status' => 'Client creation started'], Response::HTTP_ACCEPTED);
@@ -127,15 +120,19 @@ class CreateClientController
             $errors[] = 'Address is required and must be an object.';
         } else {
             $address = $data['address'];
+
             if (empty($address['street']) || !is_string($address['street'])) {
                 $errors[] = 'Street is required and must be a string.';
             }
+
             if (empty($address['city']) || !is_string($address['city'])) {
                 $errors[] = 'City is required and must be a string.';
             }
+
             if (empty($address['state']) || !is_string($address['state'])) {
                 $errors[] = 'State is required and must be a string.';
             }
+
             if (empty($address['zip']) || !is_string($address['zip'])) {
                 $errors[] = 'ZIP is required and must be a string.';
             }
