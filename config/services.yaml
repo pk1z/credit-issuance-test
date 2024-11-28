@@ -20,5 +20,26 @@ services:
             - '../src/Entity/'
             - '../src/Kernel.php'
 
-    # add more service definitions when explicit configuration is needed
-    # please note that last definitions always *replace* previous ones
+    App\Interface\Controller\:
+        resource: '../src/Interface/Controller'
+        tags: ['controller.service_arguments']
+        public: true
+
+    App\Domain\Service\NotificationServiceInterface:
+        alias: App\Infrastructure\Service\NotificationService
+        public: true
+
+    App\Application\UseCase\CreateClient\CreateClientHandler:
+        tags: ['messenger.message_handler']
+
+    App\Application\UseCase\UpdateClient\UpdateClientHandler:
+        tags: ['messenger.message_handler']
+
+    App\Application\UseCase\NotifyClient\NotifyClientHandler:
+        tags: ['messenger.message_handler']
+
+    App\Application\UseCase\GetClient\GetClientHandler:
+        tags: ['messenger.message_handler']
+
+    App\Application\UseCase\GetAllClients\GetAllClientsHandler:
+        tags: ['messenger.message_handler']

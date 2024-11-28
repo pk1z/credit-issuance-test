@@ -1,0 +1,142 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<files psalm-version="5.6.0@e784128902dfe01d489c4123d69918a9f3c1eac5">
+  <file src="src/AdminBundle/Controller/RoleCrudController.php">
+    <UndefinedDocblockClass>
+      <code>$tag</code>
+      <code>$tag</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="src/AppBundle/Command/BackOffice/RecoverAccountFreespinCommand.php">
+    <UndefinedDocblockClass>
+      <code>Exception|JsonException*</code>
+    </UndefinedDocblockClass>
+  </file>
+  <file src="src/AppBundle/Dto/CollectionDtoResolverServiceAwareTrait.php">
+    <UndefinedClass>
+      <code>new $this-&gt;className($item, $this-&gt;optionsResolver, $serviceList)</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/AppBundle/UseCase/AccountTransactionMaxBonusWinSliceUpdate/AccountTransactionMaxBonusWinSliceUpdateHandler.php">
+    <InaccessibleProperty>
+      <code>$this-&gt;logFile</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/AppBundle/UseCase/AccountTransactionWagerDoneUpdate/AccountTransactionWagerDoneUpdateHandler.php">
+    <InaccessibleProperty>
+      <code>$this-&gt;logFileInsert</code>
+      <code>$this-&gt;logFileUpdate</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/AppBundle/UseCase/BackOfficeApi/Admin/UpdateRole/UpdateRoleRouteDto.php">
+    <UndefinedClass>
+      <code>Options</code>
+      <code>Options</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/AppBundle/UseCase/BackOfficeApi/Billing/GetBillingPaymentListTotal/GetBillingPaymentListTotalHandler.php">
+    <NoValue>
+      <code>$currency</code>
+    </NoValue>
+  </file>
+  <file src="src/Billing/BillingBundle/UseCase/AbstractCallbackHandler.php">
+    <NoValue>
+      <code>$transactionStatus</code>
+    </NoValue>
+  </file>
+  <file src="src/Billing/BillingBundle/UseCase/AbstractFetchHandler.php">
+    <NoValue>
+      <code>$transactionStatus</code>
+    </NoValue>
+  </file>
+  <file src="src/AppBundle/UseCase/BackOfficeApi/Player/UpdatePlayerLimit/UpdatePlayerLimitAccountLimitEntryDto.php">
+    <UndefinedClass>
+      <code>InvalidOptionsException</code>
+    </UndefinedClass>
+  </file>
+  <file src="src/AppBundle/UseCase/BillingTransactionFinalize/BillingTransactionFinalizeHandler.php">
+    <UndefinedVariable>
+      <code>$attributes</code>
+      <code>$sessionInfo</code>
+    </UndefinedVariable>
+  </file>
+  <file src="src/AppBundle/UseCase/BpWlTransaction/BpWlTransactionAutoApprove/BpWlTransactionPspAutoApproveHandler.php">
+    <UndefinedVariable>
+      <code>$e</code>
+    </UndefinedVariable>
+  </file>
+  <file src="src/Billing/CoinsPaidBundle/UseCase/HandleCallback/HandleCallbackEntryDto.php">
+    <ParadoxicalCondition>
+      <code>default:
+                    break;</code>
+    </ParadoxicalCondition>
+  </file>
+  <file src="src/Billing/FastlyyPayBundle/Provider/FastlyyPaparaPaymentProvider.php">
+    <InaccessibleProperty>
+      <code>$dto-&gt;paymentIdentity</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/Billing/InstaPaysBundle/Provider/InstaPaysAnindaPaymentProvider.php">
+    <InaccessibleProperty>
+      <code>$dto-&gt;paymentIdentity</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/Billing/InstaPaysBundle/Provider/InstaPaysCepbankPaymentProvider.php">
+    <InaccessibleProperty>
+      <code>$dto-&gt;paymentIdentity</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/Billing/InstaPaysBundle/Provider/InstaPaysMefetePaymentProvider.php">
+    <InaccessibleProperty>
+      <code>$dto-&gt;paymentIdentity</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/Billing/InstaPaysBundle/Provider/InstaPaysPaparaPaymentProvider.php">
+    <InaccessibleProperty>
+      <code>$dto-&gt;paymentIdentity</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/Billing/PaystackBundle/Provider/PaystackBankTransferPaymentSystemProvider.php">
+    <InaccessibleProperty>
+      <code>$dto-&gt;paymentIdentity</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/Billing/RixsusBundle/Provider/RixsusPixPaymentProvider.php">
+    <InaccessibleProperty>
+      <code>$dto-&gt;paymentIdentity</code>
+      <code>$dto-&gt;paymentIdentity</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/Billing/StarsPayBundle/Provider/StarsPayPixPaymentProvider.php">
+    <InaccessibleProperty>
+      <code>$dto-&gt;paymentIdentity</code>
+      <code>$dto-&gt;paymentIdentity</code>
+      <code>$dto-&gt;transactionId</code>
+    </InaccessibleProperty>
+  </file>
+  <file src="src/AppBundle/Service/ImageCompressorService.php">
+    <UndefinedDocblockClass>
+      <code>ImagickException</code>
+      <code>ImagickException</code>
+      <code>ImagickException</code>
+      <code>ImagickException</code>
+      <code>ImagickException</code>
+      <code>ImagickException</code>
+      <code>ImagickException</code>
+    </UndefinedDocblockClass>
+    <UndefinedClass>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+      <code>Imagick</code>
+    </UndefinedClass>
+  </file>
+</files>
