@@ -11,6 +11,7 @@ use Nelmio\ApiDocBundle\Attribute\Model;
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -103,6 +104,6 @@ class UpdateClientController
 
         $this->messageBus->dispatch($command);
 
-        return new JsonResponse(['status' => 'Client updated successfully.'], JsonResponse::HTTP_OK);
+        return new JsonResponse(['status' => 'Client updated successfully.'], Response::HTTP_OK);
     }
 }

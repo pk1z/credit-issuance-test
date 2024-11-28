@@ -41,6 +41,7 @@ class CreateClientController
                 type: 'object'
             )
         ),
+        tags: ['Clients'],
         responses: [
             new OA\Response(
                 response: 201,
@@ -77,17 +78,17 @@ class CreateClientController
         }
 
         $command = new CreateClientCommand(
-            $data['firstName'],
-            $data['lastName'],
-            $data['age'],
-            $data['creditScore'],
-            $data['email'],
-            $data['phone'],
-            new Address(
-                $data['address']['street'],
-                $data['address']['city'],
-                $data['address']['state'],
-                $data['address']['zip']
+            firstName: $data['firstName'],
+            lastName: $data['lastName'],
+            age: $data['age'],
+            creditScore: $data['creditScore'],
+            email: $data['email'],
+            phone: $data['phone'],
+            address: new Address(
+                street: $data['address']['street'],
+                city: $data['address']['city'],
+                state: $data['address']['state'],
+                zip: ['address']['zip']
             )
         );
 

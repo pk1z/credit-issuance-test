@@ -71,12 +71,12 @@ class Credit
         return $this;
     }
 
-    public function getinterestRate(): ?int
+    public function getInterestRate(): ?int
     {
         return $this->interestRate;
     }
 
-    public function setinterestRate(int $interestRate): static
+    public function setInterestRate(int $interestRate): static
     {
         $this->interestRate = $interestRate;
 

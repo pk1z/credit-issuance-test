@@ -8,6 +8,7 @@ use App\Application\UseCase\IssueCredit\IssueCreditCommand;
 use OpenApi\Attributes as OA;
 use Symfony\Component\HttpFoundation\JsonResponse;
 use Symfony\Component\HttpFoundation\Request;
+use Symfony\Component\HttpFoundation\Response;
 use Symfony\Component\Messenger\MessageBusInterface;
 use Symfony\Component\Routing\Annotation\Route;
 
@@ -30,11 +31,12 @@ class IssueCreditController
                 properties: [
                     new OA\Property(property: 'clientId', type: 'integer', example: 1),
                     new OA\Property(property: 'amount', type: 'number', format: 'integer', example: 5000),
-                    new OA\Property(property: 'term', type: 'integer', example: 12),
+                    new OA\Property(property: 'loanTerm', type: 'integer', example: 12),
                 ],
                 type: 'object'
             )
         ),
+        tags: ['Credits'],
         responses: [
             new OA\Response(
                 response: 201,
@@ -67,18 +69,18 @@ class IssueCreditController
         $errors = $this->validateCreditData($data);
 
         if (!empty($errors)) {
-            return new JsonResponse(['status' => 'error', 'errors' => $errors], JsonResponse::HTTP_BAD_REQUEST);
+            return new JsonResponse(['status' => 'error', 'errors' => $errors], Response::HTTP_BAD_REQUEST);
         }
 
         $command = new IssueCreditCommand(
-            $data['clientId'],
-            $data['amount'],
-            $data['term']
+            clientId: $data['clientId'],
+            amount: $data['amount'],
+            loanTerm: $data['loanTerm']
         );
 
         $this->messageBus->dispatch($command);
 
-        return new JsonResponse(['status' => 'Credit issuance started'], JsonResponse::HTTP_ACCEPTED);
+        return new JsonResponse(['status' => 'Credit issuance started'], Response::HTTP_ACCEPTED);
     }
 
     private function validateCreditData(array $data): array
@@ -93,8 +95,8 @@ class IssueCreditController
             $errors[] = 'Amount is required and must be an integer.';
         }
 
-        if (empty($data['term']) || !is_int($data['term']) || $data['term'] <= 0) {
-            $errors[] = 'Term is required and must be a positive integer.';
+        if (empty($data['loanTerm']) || !is_int($data['loanTerm']) || $data['loanTerm'] <= 0) {
+            $errors[] = 'Loan term is required and must be a positive integer.';
         }
 
         return $errors;
